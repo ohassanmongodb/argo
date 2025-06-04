@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: atlas-apps
+  namespace: argocd
+spec:
+  destination:
+    namespace: mongodb-atlas-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/ohassanmongodb/argo.git
+    targetRevision: HEAD
+    path: apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+
